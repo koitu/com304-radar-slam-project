@@ -64,40 +64,91 @@ def main(exp_num,lua_file):
     logging.info('Parent process exiting...')
     # update status to done, or cancelled or error?
 
+# class MyApp(ShowBase):
+#     def __init__(self, queue):
+#         ShowBase.__init__(self)
+
+#         self.q = queue
+#         # self.accept("escape", sys.exit, [0])
+
+#         #NEED TO CHANGE THESE EACH TIME
+#         self.rfft_size = 512
+#         self.rfft_range = [0, 1]
+
+#         # Create subplots for FFT and phase 
+#         plt.ion()
+#         self.fig = plt.figure()
+#         self.ax_rfft = self.fig.add_subplot(111)
+#         #self.text_rfft = self.ax_rfft.text(0.90, 0.85, "Nothing" , fontsize=40, transform=self.ax_rfft.transAxes, verticalalignment='top', ha='right')
+
+#         # initialize FFT plot
+#         self.rfft_x_data = np.arange(self.rfft_size)
+#         self.rfft_y_data = np.zeros_like(self.rfft_x_data)
+#         self.line_rfft = self.ax_rfft.stem(self.rfft_x_data, self.rfft_y_data)
+#         self.ax_rfft.set_ylim(self.rfft_range)
+
+#         self.taskMgr.add(self.updateDataTask, "updateDataTask")
+#         self.taskMgr.add(self.updateRFFTPlotTask, "updateRFFTPlotTask")
+
+#     def updateRFFTPlotTask(self, task):
+#         self.line_rfft[0].set_ydata(self.rfft_y_data)
+#         self.line_rfft[1].set_paths([np.array([[xx, 0], 
+#                                     [xx, yy]]) for (xx, yy) in zip(self.rfft_x_data, self.rfft_y_data)])
+#         self.ax_rfft.set_ylim([np.min(self.rfft_y_data)-1, np.max(self.rfft_y_data)+1])
+#         max_ind = np.argmax(self.rfft_y_data)
+#         #self.text_rfft.remove()
+#         #self.text_rfft = self.ax_rfft.text(0.56, 0.85, "Here is some text", transform=self.ax_rfft.transAxes, fontsize=15,verticalalignment='top', ha='left')
+#         self.fig.canvas.draw()
+#         self.fig.canvas.flush_events()
+#         return Task.cont
+
+#     def updateDataTask(self, task):
+#         try:
+#             while self.q.qsize() > 0:
+#                 new_data = self.q.get(block=False)
+#                 if new_data[0] == "rfft":
+#                     self.rfft_y_data = new_data[1]
+                
+#         except:
+#             return Task.cont
+
+#         return Task.cont
+
 class MyApp(ShowBase):
     def __init__(self, queue):
         ShowBase.__init__(self)
 
         self.q = queue
-        # self.accept("escape", sys.exit, [0])
 
-        #NEED TO CHANGE THESE EACH TIME
-        self.rfft_size = 512
-        self.rfft_range = [0, 1]
-
-        # Create subplots for FFT and phase 
         plt.ion()
         self.fig = plt.figure()
-        self.ax_rfft = self.fig.add_subplot(111)
+        self.ax = self.fig.add_subplot(111)
         #self.text_rfft = self.ax_rfft.text(0.90, 0.85, "Nothing" , fontsize=40, transform=self.ax_rfft.transAxes, verticalalignment='top', ha='right')
 
+        self.data = np.zeros((179, 190))
+        self.ax.imshow(self.data)
+
         # initialize FFT plot
-        self.rfft_x_data = np.arange(self.rfft_size)
-        self.rfft_y_data = np.zeros_like(self.rfft_x_data)
-        self.line_rfft = self.ax_rfft.stem(self.rfft_x_data, self.rfft_y_data)
-        self.ax_rfft.set_ylim(self.rfft_range)
+        # self.rfft_x_data = np.arange(self.rfft_size)
+        # self.rfft_y_data = np.zeros_like(self.rfft_x_data)
+        # self.line_rfft = self.ax_rfft.stem(self.rfft_x_data, self.rfft_y_data)
+        # self.ax_rfft.set_ylim(self.rfft_range)
 
         self.taskMgr.add(self.updateDataTask, "updateDataTask")
         self.taskMgr.add(self.updateRFFTPlotTask, "updateRFFTPlotTask")
 
     def updateRFFTPlotTask(self, task):
-        self.line_rfft[0].set_ydata(self.rfft_y_data)
-        self.line_rfft[1].set_paths([np.array([[xx, 0], 
-                                    [xx, yy]]) for (xx, yy) in zip(self.rfft_x_data, self.rfft_y_data)])
-        self.ax_rfft.set_ylim([np.min(self.rfft_y_data)-1, np.max(self.rfft_y_data)+1])
-        max_ind = np.argmax(self.rfft_y_data)
+        # self.line_rfft[0].set_ydata(self.rfft_y_data)
+        # self.line_rfft[1].set_paths([np.array([[xx, 0], 
+        #                             [xx, yy]]) for (xx, yy) in zip(self.rfft_x_data, self.rfft_y_data)])
+        # self.ax_rfft.set_ylim([np.min(self.rfft_y_data)-1, np.max(self.rfft_y_data)+1])
+        # max_ind = np.argmax(self.rfft_y_data)
+
         #self.text_rfft.remove()
         #self.text_rfft = self.ax_rfft.text(0.56, 0.85, "Here is some text", transform=self.ax_rfft.transAxes, fontsize=15,verticalalignment='top', ha='left')
+
+        self.ax.imshow(self.data, vmin=0, vmax=1.2)
+
         self.fig.canvas.draw()
         self.fig.canvas.flush_events()
         return Task.cont
@@ -106,13 +157,14 @@ class MyApp(ShowBase):
         try:
             while self.q.qsize() > 0:
                 new_data = self.q.get(block=False)
-                if new_data[0] == "rfft":
-                    self.rfft_y_data = new_data[1]
+                if new_data[0] == "bf":
+                    self.data = new_data[1]
                 
         except:
             return Task.cont
 
         return Task.cont
+
 
 
 
