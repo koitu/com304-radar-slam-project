@@ -3,7 +3,7 @@
 --------------------------------------------------------------
 
 
-COM_PORT = 4 -- TODO: edit this!!! (to the correct port number that you see in your Device Manager)
+COM_PORT = 11 -- TODO: edit this!!! (to the correct UART port number that you see in your Device Manager)
 -- Firmware paths
 RADARSS_PATH = "C:\\ti\\mmwave_studio_02_01_01_00\\rf_eval_firmware\\radarss\\xwr18xx_radarss.bin"
 MASTERSS_PATH = "C:\\ti\\mmwave_studio_02_01_01_00\\rf_eval_firmware\\masterss\\xwr18xx_masterss.bin"
@@ -131,11 +131,10 @@ print("Max Unambiguous Range:", MAX_RANGE)
 print("Doppler Resolution:", DOPPLER_RESOLUTION)
 print("Max Doppler:", MAX_DOPPLER)
 
-
-capture_file = "1"
+capture_file = "2"
 
 --TODO: edit this path!!
-SAVE_DATA_PATH = "C:\\Users\\\selec\\OneDrive\\Documents\\GitHub\\comm-proj-radar\\record\\" .. capture_file .. ".bin"
+SAVE_DATA_PATH = "Y:\\com304-project\\record\\" .. capture_file .. ".bin"
 
 ar1.CaptureCardConfig_StartRecord(SAVE_DATA_PATH, 1)
 ar1.StartFrame()

@@ -18,9 +18,11 @@ def producer_real_time_1843(q, index, lua_file):
     """
     num_rx, num_tx, samples_per_chirp, periodicity, num_frames, chirp_loops, data_rate, freq_plot_len, range_plot_len = utility.read_radar_params(lua_file) 
     dca = DCA1000()
+
     # chirp configurations based on your config lua file
     dca.sensor_config(chirps=num_tx*chirp_loops, chirp_loops=1, num_rx=num_rx, num_samples=samples_per_chirp)
     prev_time = time.time()
+
     while True:
         # here we actually reads from the ethernet port
         adc_data = dca.read()
@@ -37,7 +39,7 @@ def producer_real_time_1843(q, index, lua_file):
         afx = np.squeeze(np.abs(fx))
 
         now = time.time()
-        # So as to not overload the upating, we will just refresh the data every 0.1 seconds
+        # So as to not overload the updating, we will just refresh the data every 0.1 seconds
         if now - prev_time > 0.1:
             # put the tuple containing the data's name and the data into the queue that will be sent to plotting (see realtime_streaming.py)
             q.put(["rfft", afx])

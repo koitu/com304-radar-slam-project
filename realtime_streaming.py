@@ -1,4 +1,3 @@
-
 import sys
 import warnings
 
@@ -15,9 +14,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 from streaming.prod_dca import producer_real_time_1843
 
+
 def consumer(q, index):
     app = MyApp(q)
     app.run()
+
 
 def main(exp_num,lua_file):
 
@@ -117,7 +118,7 @@ class MyApp(ShowBase):
 
 if __name__ == '__main__':
     # TODO: change these to match your paths
-    home_dir = r'C:\Users\selec\OneDrive\Documents\GitHub\comm-proj-radar' # home directory path (of the project folder, full path)
+    home_dir = r'Y:\com304-project' # home directory path (of the project folder, full path)
     config_lua_script = os.path.join(home_dir, r'scripts\1843_config_streaming.lua') # relative path to the lua scripts for continuous it in is the home dir(ex. scripts/1843_config_streaming.lua)
 
     main(0,config_lua_script)
