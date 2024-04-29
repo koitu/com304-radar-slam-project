@@ -1,0 +1,3 @@
+[submodule "pymmw"]
+	path = pymmw
+	url = git@github.com:m6c7l/pymmw.git
