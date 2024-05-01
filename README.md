@@ -4,9 +4,9 @@ much stolen from: https://github.com/hailanzs/comm-proj-radar
 some major changes:
 - moved `streaming/mmwave` to `mmwave`
 - deleted `streaming/radar.py`
-- deleted `capture_data.ipynb`
-    - `RtttNetClientAPI` is only available in MatLAB and does not work in Python
-- deleted `adc\ \(hshanbha@illinois.edu\).py`
+  - `RtttNetClientAPI` is only available in MatLAB and does not work in Python
+- deleted `capture_data.ipynb` (uses `radar.py`)
+- deleted `adc (hshanbha@illinois.edu).py`
 - deleted `adc_modified.py`
 
 <!-- # Andrew: HOW IS 'radar' A PYTHON SCRIPT???

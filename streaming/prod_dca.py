@@ -95,8 +95,6 @@ def producer_real_time_1843(q, index, lua_file):
 
     while True:
         # THE WAY THIS PRODUCER IS SNYCONIZED WITH THE CONSUMER IS SHIT!!!
-        
-        time.sleep(0.2)
 
         # here we actually reads from the ethernet port
         adc_data = dca.read()
@@ -122,15 +120,13 @@ def producer_real_time_1843(q, index, lua_file):
         x = np.reshape(x, (-1, 512))
         res = np.sum(np.multiply(x[:, np.newaxis, :], rfi), axis=0)
 
-        # plot_lim_y = [10,200]
-        # plot_lim_x = [0 - theta_s,179 - theta_s]
         res = res[0:179, 10:200] / np.max(res)
         res = abs(res[:,::-1]).T
 
         now = time.time()
         # So as to not overload the updating, we will just refresh the data every 0.1 seconds
         # if now - prev_time > 0.1:
-        if now - prev_time > 1:
+        if now - prev_time > 0.5:
             # put the tuple containing the data's name and the data into the queue that will be sent to plotting (see realtime_streaming.py)
             q.put(["bf", res])
             prev_time = now

@@ -1,4 +1,5 @@
 import sys
+import time
 import warnings
 
 warnings.simplefilter("ignore", UserWarning)
@@ -20,7 +21,7 @@ def consumer(q, index):
     app.run()
 
 
-def main(exp_num,lua_file):
+def main(exp_num, lua_file):
 
     num_producers = 2
     num_consumers = 1
@@ -121,12 +122,17 @@ class MyApp(ShowBase):
         self.q = queue
 
         plt.ion()
-        self.fig = plt.figure()
-        self.ax = self.fig.add_subplot(111)
-        #self.text_rfft = self.ax_rfft.text(0.90, 0.85, "Nothing" , fontsize=40, transform=self.ax_rfft.transAxes, verticalalignment='top', ha='right')
-
         self.data = np.zeros((179, 190))
-        self.ax.imshow(self.data)
+        self.fig = plt.figure()
+        # self.im = plt.imshow(self.data, animated=True, vmin=0, vmax=1.2)
+        self.im = plt.imshow(self.data, vmin=0, vmax=1.2)
+
+        # self.ax = self.fig.add_subplot(111)
+        # #self.text_rfft = self.ax_rfft.text(0.90, 0.85, "Nothing" , fontsize=40, transform=self.ax_rfft.transAxes, verticalalignment='top', ha='right')
+        #
+        # self.data = np.zeros((179, 190))
+        # self.ax.imshow(self.data)
+
 
         # initialize FFT plot
         # self.rfft_x_data = np.arange(self.rfft_size)
@@ -147,10 +153,12 @@ class MyApp(ShowBase):
         #self.text_rfft.remove()
         #self.text_rfft = self.ax_rfft.text(0.56, 0.85, "Here is some text", transform=self.ax_rfft.transAxes, fontsize=15,verticalalignment='top', ha='left')
 
-        self.ax.imshow(self.data, vmin=0, vmax=1.2)
+        # self.ax.imshow(self.data, vmin=0, vmax=1.2)
+        self.im.set_array(self.data)
 
         self.fig.canvas.draw()
         self.fig.canvas.flush_events()
+        time.sleep(0.05)
         return Task.cont
 
     def updateDataTask(self, task):
@@ -166,11 +174,9 @@ class MyApp(ShowBase):
         return Task.cont
 
 
-
-
 if __name__ == '__main__':
     # TODO: change these to match your paths
     home_dir = r'Y:\com304-project' # home directory path (of the project folder, full path)
     config_lua_script = os.path.join(home_dir, r'scripts\1843_config_streaming.lua') # relative path to the lua scripts for continuous it in is the home dir(ex. scripts/1843_config_streaming.lua)
 
-    main(0,config_lua_script)
+    main(0, config_lua_script)
