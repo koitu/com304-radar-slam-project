@@ -1,3 +1,6 @@
 [submodule "pymmw"]
 	path = pymmw
 	url = git@github.com:m6c7l/pymmw.git
+[submodule "OpenRadar"]
+	path = OpenRadar
+	url = git@github.com:PreSenseRadar/OpenRadar.git
