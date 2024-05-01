@@ -3,7 +3,7 @@
 --------------------------------------------------------------
 
 
-COM_PORT = 9 -- TODO: edit this!!! (to the correct port number that you see in your Device Manager)
+COM_PORT = 11 -- TODO: edit this!!! (to the correct port number that you see in your Device Manager)
 -- Firmware paths
 RADARSS_PATH = "C:\\ti\\mmwave_studio_02_01_01_00\\rf_eval_firmware\\radarss\\xwr18xx_radarss.bin"
 MASTERSS_PATH = "C:\\ti\\mmwave_studio_02_01_01_00\\rf_eval_firmware\\masterss\\xwr18xx_masterss.bin"
