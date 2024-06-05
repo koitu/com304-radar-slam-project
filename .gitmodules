@@ -4,3 +4,9 @@
 [submodule "OpenRadar"]
 	path = OpenRadar
 	url = git@github.com:PreSenseRadar/OpenRadar.git
+[submodule "radarize_ae"]
+	path = radarize_ae
+	url = git@github.com:ConnectedSystemsLab/radarize_ae.git
+[submodule "xwr_raw_ros"]
+	path = xwr_raw_ros
+	url = git@github.com:ConnectedSystemsLab/xwr_raw_ros.git
