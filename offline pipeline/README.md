@@ -1,0 +1,50 @@
+radarize
+- `sudo apt update`
+- `sudo apt install vim git curl ninja-build stow lsb-release python3-pip imagemagick`
+- [install ubuntu](https://wiki.ros.org/noetic/Installation/Ubuntu)
+    - `sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'`
+    - `curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -`
+    - `sudo apt update`
+    - `sudo apt install ros-noetic-desktop-full`
+    - ADD TO ~/.bashrc: `source /opt/ros/noetic/setup.bash`
+    - `sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential`
+    - `sudo rosdep init`
+    - `rosdep update`
+- [xwr\_raw\_ros](https://github.com/ConnectedSystemsLab/xwr_raw_ros)
+    - `sudo apt install ros-noetic-catkin python3-catkin-tools`
+    - `mkdir -p ~/catkin_ws/src`
+    - `cd ~/catkin_ws/src && git clone https://github.com/ConnectedSystemsLab/xwr_raw_ros.git`
+    - `cd ..`
+    - `rosdep install --from-paths src --ignore-src -iry && pip install -r src/xwr_raw_ros/requirements.txt`
+    - `cd ~/catkin_ws && catkin build`
+    - ADD TO ~/.bashrc: `source ~/catkin_ws/devel/setup.bash`
+- [cartographer](https://google-cartographer-ros.readthedocs.io/en/latest/compilation.html)
+    - `wstool init src`
+    - `wstool merge -t src https://raw.githubusercontent.com/cartographer-project/cartographer_ros/master/cartographer_ros.rosinstall`
+    - `wstool update -t src`
+    - REMOVE libabsl-dev: `vim src/cartographer/package.xml`
+    - `rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -y`
+    - `src/cartographer/scripts/install_abseil.sh`
+    - `sudo ln -s /usr/bin/empy3 /usr/bin/empy`
+    - `catkin_make_isolated --install --use-ninja`
+- [miniconda](https://docs.anaconda.com/free/miniconda/)
+    - `sudo mkdir /opt/conda`
+    - `sudo chmod 777 /opt/conda`
+    - `cd /opt/conda`
+    - `curl -o miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh`
+    - `bash miniconda.sh -b -u -p /opt/conda`
+    - `rm /opt/conda/miniconda.sh`
+    - `conda init`
+    - `conda config --set auto_activate_base false`
+- [radarize](https://github.com/ConnectedSystemsLab/radarize_ae)
+    - `conda env create -f env.yaml`
+    - `conda activate radarize_ae`
+    - `pip install -e .`
+    - move the files from `cartographer/` (in the gitrepo) to `<catkin_ws>/install_isolated/share/cartographer_ros/`
+
+To launch xwr\_raw\_ros
+- `sudo ip a add 192.168.33.30/24 dev enxa0cec89de3b4`
+- `chmod 666 /dev/ttyACM*`
+- `chown root:koitu /dev/ttyACM*`
+- `roslaunch xwr_raw_ros radar_visra_c.launch`
+
