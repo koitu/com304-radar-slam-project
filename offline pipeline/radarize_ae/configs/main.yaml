@@ -1,0 +1,28 @@
+DATASET:
+  TRAIN_SPLIT:
+  VAL_SPLIT:
+  TEST_SPLIT:
+      - 2024-05-26-21-16-06
+      - 2024-05-26-21-22-06
+      - 2024-05-26-21-24-50
+      - 2024-05-26-21-25-38
+      - 2024-06-06-21-20-04
+      - 2024-06-06-21-21-51
+      - 2024-06-06-21-50-29
+
+
+OUTPUT_DIR: 'output_main/'
+
+
+FLOW:
+  TRAIN:
+    EPOCHS: 30
+
+ROTNET:
+  TRAIN:
+    EPOCHS: 30
+
+UNET:
+  TRAIN:
+    EPOCHS: 5
+
