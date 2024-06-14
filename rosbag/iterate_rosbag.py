@@ -37,7 +37,7 @@ if __name__ == "__main__":
     from datetime import datetime
 
     topic = "/imu"
-    input_bag = "rosbag2_2024_05_01-15_19_52"  # TODO: EDIT
+    input_bag = "rosbag2_2024_05_01-19_23_13"  # TODO: EDIT
     storage_id = "sqlite3"  # alternative is "mcap"
 
     msg_counter = 0
@@ -48,10 +48,12 @@ if __name__ == "__main__":
         # print(timestamp, msg)
         # print(f"{timestamp}: {msg.orientation}")
         # print(f"{timestamp}: {msg.angular_velocity}")
-        print(f"{timestamp}: {msg.linear_acceleration}")
+        # print(f"{timestamp}: {msg.linear_acceleration}")
 
         # print(f"{datetime.fromtimestamp(timestamp / 1e9)}")
-        if msg_counter > 10:
-              break
+        # if msg_counter > 10:
+        #      break
+        if msg_counter % 15 == 0:
+            print(f"{datetime.fromtimestamp(timestamp / 1e9)}")
 
         msg_counter += 1

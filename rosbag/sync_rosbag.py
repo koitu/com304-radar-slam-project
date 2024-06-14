@@ -45,6 +45,7 @@ if __name__ == "__main__":
     prev_msg = None
     frame_num = 0
     avg_error = 0
+    dropped_frames = 0
 
     for timestamp, msg in iterate_rosbag(input_bag, topic, storage_id):
         cur_frame_time = start_time + frame_num * frame_period
@@ -63,8 +64,12 @@ if __name__ == "__main__":
 
             frame_num += 1
             if frame_num >= tot_frame_num:  # done
-                print(f"Average error: {avg_error}")
                 del writer
                 break
+        else:
+            dropped_frames += 1
 
         prev_timestamp, prev_msg = (timestamp, msg)
+
+    print(f"Average error: {avg_error}")
+    print(f"Frames dropped: {dropped_frames}")
