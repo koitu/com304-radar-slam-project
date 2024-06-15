@@ -1,3 +1,15 @@
 [submodule "offline pipeline/xwr_raw_ros"]
 	path = offline pipeline/xwr_raw_ros
 	url = git@github.com:ConnectedSystemsLab/xwr_raw_ros.git
+[submodule "online_pipeline/turtlebot4_ws/src/turtlebot4"]
+    path = online_pipeline/turtlebot4_ws/src/turtlebot4
+    url = https://github.com/turtlebot/turtlebot4.git
+[submodule "online_pipeline/turtlebot4_ws/src/turtlebot4_desktop"]
+    path = online_pipeline/turtlebot4_ws/src/turtlebot4_desktop
+    url = https://github.com/turtlebot/turtlebot4_desktop.git
+[submodule "online_pipeline/turtlebot4_ws/src/turtlebot4_robot"]
+    path = online_pipeline/turtlebot4_ws/src/turtlebot4_robot
+    url = https://github.com/turtlebot/turtlebot4_robot.git
+[submodule "online_pipeline/turtlebot4_ws/src/turtlebot4_simulator"]
+    path = online_pipeline/turtlebot4_ws/src/turtlebot4_simulator
+    url = https://github.com/turtlebot/turtlebot4_simulator.git
